@@ -2,6 +2,9 @@ package ru.mirea.pr12;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -32,8 +35,15 @@ public class Main extends Application {
      }
     }
 
-    private int operationByNumber(int num){
-
+    private int operationByNumber(int num, int first, int second){
+        switch (num){
+            case 1: return first+second;
+            case 2: return first-second;
+            case 3: return first*second;
+            case 4: if(second!=0) return first/second;
+                    else return 0;
+            default: return 0;
+        }
     }
 
 
@@ -55,6 +65,87 @@ public class Main extends Application {
         Button buttonDivision = new Button("/");
         Button buttonResult = new Button("=");
         Button buttonClear = new Button("clear");
+
+
+        buttonPlus.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(checkInt(textField1.getText())){
+                    accumulator1 = Integer.parseInt(textField1.getText());
+                    numberOfOperation = 1;
+                    expression.setText(accumulator1+signOfOperation(numberOfOperation));
+                }else {
+                    expression.setText("Ошибка ввода!");
+                }
+                textField1.clear();
+            }
+        });
+
+        buttonMinus.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(checkInt(textField1.getText())){
+                    accumulator1 = Integer.parseInt(textField1.getText());
+                    numberOfOperation = 2;
+                    expression.setText(accumulator1+signOfOperation(numberOfOperation));
+                }else {
+                    expression.setText("Ошибка ввода!");
+                }
+                textField1.clear();
+            }
+        });
+
+        buttonMultiplication.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(checkInt(textField1.getText())){
+                    accumulator1 = Integer.parseInt(textField1.getText());
+                    numberOfOperation = 3;
+                    expression.setText(accumulator1+signOfOperation(numberOfOperation));
+                }else {
+                    expression.setText("Ошибка ввода!");
+                }
+                textField1.clear();
+            }
+        });
+
+        buttonDivision.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(checkInt(textField1.getText())){
+                    accumulator1 = Integer.parseInt(textField1.getText());
+                    numberOfOperation = 4;
+                    expression.setText(accumulator1+signOfOperation(numberOfOperation));
+                }else {
+                    expression.setText("Ошибка ввода!");
+                }
+                textField1.clear();
+            }
+        });
+
+        buttonResult.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(checkInt(textField1.getText())){
+                    accumulator2 = Integer.parseInt(textField1.getText());
+                    int result=operationByNumber(numberOfOperation, accumulator1, accumulator2);
+                    expression.setText(accumulator1+signOfOperation(numberOfOperation)+accumulator2+" = "+result);
+                    textField1.setText(result+"");
+                }else {
+                    expression.setText("Ошибка ввода!");
+                }
+            }
+        });
+
+        buttonClear.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                accumulator1=accumulator2=numberOfOperation=0;
+                textField1.clear();
+                expression.setText(" ");
+            }
+        });
+
 
         //Creating a Grid Pane
         GridPane gridPane = new GridPane();
