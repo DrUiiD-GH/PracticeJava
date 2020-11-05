@@ -1,7 +1,6 @@
 package ru.mirea.pr12;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -151,7 +150,7 @@ public class Main extends Application {
         GridPane gridPane = new GridPane();
 
         //Setting size for the pane
-        gridPane.setMinSize(400, 200);
+        gridPane.setMinSize(300, 150);
 
         //Setting the padding
         gridPane.setPadding(new Insets(10, 10, 10, 10));
